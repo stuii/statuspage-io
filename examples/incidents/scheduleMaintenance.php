@@ -14,8 +14,8 @@
 
     try {
         $incident->scheduleMaintenance(
-            from: new DateTime('2021-09-01 23:00:00',new DateTimeZone('Europe/Zurich')),
-            to: new DateTime('2021-09-01 23:01:00',new DateTimeZone('Europe/Zurich'))
+            from: new DateTime('2025-09-01 23:00:00',new DateTimeZone('Europe/Zurich')),
+            to: new DateTime('2025-09-01 23:01:00',new DateTimeZone('Europe/Zurich'))
         );
     } catch (\Stui\StatuspageIo\Exceptions\StatuspageException $e){
         // handle exception

@@ -20,18 +20,8 @@
         private Client $client;
 
         private ?string $id = null;
-        private string $name;
-        private ?DateTime $createdAt = null;
-        private ?IncidentStatus $incidentStatus = null;
-        private ?Impact $impact = null;
-        private ?Impact $impactOverride = null;
-        private ?DateTime $scheduledFor = null;
-        private ?DateTime $scheduledUntil = null;
-        private ?bool $scheduledRemindPrior = null;
-        private ?bool $scheduledAutoInProgress = null;
-        private ?bool $scheduledAutoCompleted = null;
-        //private $metadata;
-        private bool $deliverNotifications = true;
+
+        private array $affectedComponents = [];
         private ?bool $autoTransitionDeliverNotificationsAtEnd = null;
         private ?bool $autoTransitionDeliverNotificationsAtStart = null;
         private ?bool $autoTransitionToMaintenanceState = null;
@@ -43,11 +33,32 @@
         private ?DateTime $backfillDate = null;
         private ?bool $backfilled = null;
         private ?string $body = null;
-        private array $affectedComponents = [];
+        private ?DateTime $createdAt = null;
         private array $componentIds = [];
+        private bool $deliverNotifications = true;
+        private ?IncidentStatus $incidentStatus = null;
+        private ?Impact $impact = null;
+        private ?Impact $impactOverride = null;
+        private array $incidentUpdates = [];
+        //private $metadata;
+        private ?DateTime $monitoringAt = null;
+        private ?string $name = null;
+        private ?string $postmortemBody = null;
+        private ?DateTime $postmortemBodyLastUpdatedAt = null;
+        private ?bool $postmortemIgnored = null;
+        private ?bool $postmortemNotifiedSubscribers = null;
+        private ?bool $postmortemNotifiedTwitter = null;
+        private ?bool $postmortemPublishedAt = null; // TODO: type correct?
+        private ?DateTime $resolvedAt = null;
+        private ?bool $scheduledAutoCompleted = null;
+        private ?bool $scheduledAutoInProgress = null;
         private ?bool $scheduledAutoTransition = null;
-
-
+        private ?DateTime $scheduledFor = null;
+        private ?bool $scheduledRemindPrior = null;
+        private ?DateTime $scheduledRemindedAt = null;
+        private ?DateTime $scheduledUntil = null;
+        private ?string $shortlink = null;
+        private ?DateTime $updatedAt = null;
 
 
         public function __construct(Client $client, string $name)

@@ -11,7 +11,7 @@
         protected string $value;
 
         /**
-         * @throws \Stui\StatuspageIo\Exceptions\EnumException
+         * @throws EnumException
          */
         public function __construct(string $value)
         {
