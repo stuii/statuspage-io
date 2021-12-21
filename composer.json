@@ -1,11 +1,12 @@
 {
     "name": "stui/statuspage-io",
-    "description": "SDK for the statuspage.io API by Atlassian",
+    "description": "SDK for the statuspage.io API by Atlassian. WARNING: VEEEERY MUCH WIP",
     "type": "library",
     "license": "Apache-2.0",
     "autoload": {
         "psr-4": {
-            "Stui\\StatuspageIo\\": "src/"
+            "Stui\\StatuspageIo\\": "src/",
+            "Stui\\StatuspageCLI\\": "cli/"
         }
     },
     "authors": [
@@ -14,10 +15,12 @@
             "email": "me@stui.ch"
         }
     ],
+    "bin": ["cli/statuspage.php"],
     "minimum-stability": "dev",
     "require": {
         "php": ">=8.0",
-        "ext-curl": "*"
+        "ext-curl": "*",
+        "corneltek/cliframework": "*"
     },
     "require-dev": {
         "codeception/codeception": "^4.1.22",

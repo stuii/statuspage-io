@@ -4,9 +4,10 @@
     $dotenv = Dotenv\Dotenv::createImmutable('../../');
     $dotenv->load();
 
-    $client = new \Stui\StatuspageIo\Client();
-    $client->setApiKey($_ENV['API_KEY']);
-    $client->setPageId($_ENV['PAGE_ID']);
+    $client = new \Stui\StatuspageIo\Client(
+        apiKey: $_ENV['API_KEY'],
+        pageId: $_ENV['PAGE_ID']
+    );
 
     $incident = new \Stui\StatuspageIo\Service\Incident($client, 'Test-Backfill');
     $incident->setBody('Lorem ipsum dolor sit amet, consetetur sadipscing elitr');
