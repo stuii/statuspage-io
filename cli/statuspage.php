@@ -1,6 +1,11 @@
 <?php
 
-    require_once '../vendor/autoload.php';
+    $path = __DIR__;
+
+    while (!file_exists($path.'/autoload.php')) {
+        $path .= '/..';
+    }
+    require_once $path.'/autoload.php';
 
     $app = new \Stui\StatuspageCLI\Console;
-    $app->runWithTry($argv); // $argv is a global variable containing command line arguments.
+    $app->runWithTry($argv);
