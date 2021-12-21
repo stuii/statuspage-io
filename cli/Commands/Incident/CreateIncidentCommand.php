@@ -15,16 +15,20 @@
         }
         public function execute()
         {
-            $dotenv = \Dotenv\Dotenv::createImmutable('../');
-            try {
-                $dotenv->load();
-            } catch (\Dotenv\Exception\ExceptionInterface) {
-                echo 'No Dotenv File found.';
+            $apiKey = $this->getOptions()->get('api-key');
+            $pageId = $this->getOptions()->get('page-id');
+
+            if (is_null($apiKey)) {
+                echo 'No API Key specified';
+                exit(1);
+            }
+            if (is_null($pageId)) {
+                echo 'No Page ID specified';
                 exit(1);
             }
 
             $client = new \Stui\StatuspageIo\Client(
-                apiKey: $_ENV['API_KEY'], pageId: $_ENV['PAGE_ID']
+                apiKey: $apiKey, pageId: $pageId
             );
 
             $title = $this->getOptions()->get('title');
@@ -118,19 +122,28 @@
             $opts->add('c|component+', 'Specify the ID of an affected component')
                 ->isa('string');
 
-            $opts->add('cs|component-status+', 'Specify the status of each affected component')
+            $opts->add('x|component-status+', 'Specify the status of each affected component')
                 ->isa('string');
 
             $opts->add('i|impact?', 'Specify the incident impact override')
                 ->isa('string');
 
-            $opts->add('is|incident-status:', 'Specify the incident status')
+            $opts->add('s|incident-status:', 'Specify the incident status')
                 ->isa('string');
 
             $opts->add('t|title:', 'Specify the title for the incident')
                 ->isa('string');
 
             $opts->add('d|description:', 'Specify a description for the incident')
+                ->isa('string');
+
+
+
+
+            $opts->add('a|api-key:', 'Specify the API Key')
+                ->isa('string');
+
+            $opts->add('p|page-id:', 'Specify the Page-ID')
                 ->isa('string');
         }
 

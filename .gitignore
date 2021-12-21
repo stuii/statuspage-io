@@ -27,5 +27,6 @@ Thumbs.db
 *.wmv
 /composer.lock
 /codecept.phar
+.env
 
 vendor/

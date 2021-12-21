@@ -18,10 +18,15 @@
             $this->command('delete', DeleteIncidentCommand::class);
             $this->command('schedule', ScheduleIncidentCommand::class);
         }
+
         public function brief(): string
         {
             return "Creates a new or manipulates an existing incident";
         }
 
+        public function execute()
+        {
+            exit(0);
+        }
 
     }

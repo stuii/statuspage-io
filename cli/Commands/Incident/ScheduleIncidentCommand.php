@@ -15,16 +15,20 @@
         }
         public function execute()
         {
-            $dotenv = \Dotenv\Dotenv::createImmutable('../');
-            try {
-                $dotenv->load();
-            } catch (\Dotenv\Exception\ExceptionInterface) {
-                echo 'No Dotenv File found.';
+            $apiKey = $this->getOptions()->get('api-key');
+            $pageId = $this->getOptions()->get('page-id');
+
+            if (is_null($apiKey)) {
+                echo 'No API Key specified';
+                exit(1);
+            }
+            if (is_null($pageId)) {
+                echo 'No Page ID specified';
                 exit(1);
             }
 
             $client = new \Stui\StatuspageIo\Client(
-                apiKey: $_ENV['API_KEY'], pageId: $_ENV['PAGE_ID']
+                apiKey: $apiKey, pageId: $pageId
             );
 
             $title = $this->getOptions()->get('title');
@@ -101,6 +105,15 @@
                 ->isa('string');
 
             $opts->add('e|end:', 'Specify a date and time, the incident should be over by')
+                ->isa('string');
+
+
+
+
+            $opts->add('a|api-key:', 'Specify the API Key')
+                ->isa('string');
+
+            $opts->add('p|page-id:', 'Specify the Page-ID')
                 ->isa('string');
         }
 
