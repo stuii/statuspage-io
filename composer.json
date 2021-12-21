@@ -20,7 +20,7 @@
     "require": {
         "php": ">=8.0",
         "ext-curl": "*",
-        "corneltek/cliframework": "*"
+        "corneltek/cliframework": "4.1.1"
     },
     "require-dev": {
         "codeception/codeception": "^4.1.22",
