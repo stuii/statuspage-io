@@ -21,5 +21,8 @@
             return "Creates a new or manipulates an existing maintenance";
         }
 
-
+        public function execute()
+        {
+            exit(0);
+        }
     }
