@@ -63,6 +63,8 @@
 
         private ?array $updateComponents = null;
 
+        private bool $filled = false;
+
 
         public function __construct(Client $client, ?string $name = null)
         {
@@ -112,19 +114,19 @@
             }
 
 
-            if (!is_null($this->getScheduledUntil()) && is_null($this->getScheduledFor()) || is_null($this->getScheduledUntil()) && !is_null($this->getScheduledFor())) {
+            if (!$this->filled && (!is_null($this->getScheduledUntil()) && is_null($this->getScheduledFor()) || is_null($this->getScheduledUntil()) && !is_null($this->getScheduledFor()))) {
                 throw new InvalidValueException('Cannot set schedule maintenance, if not both scheduled_for and scheduled_until are provided.', 1006);
             }
 
-            if ($this->getScheduledUntil() < $this->getScheduledFor()) {
+            if (!$this->filled && $this->getScheduledUntil() < $this->getScheduledFor()) {
                 throw new InvalidValueException('Cannot set schedule_until earlier than schedule_for.', 1007);
             }
 
-            if (!is_null($this->getScheduledFor()) && $this->getScheduledFor() < new DateTime()) {
+            if (!$this->filled && !is_null($this->getScheduledFor()) && $this->getScheduledFor() < new DateTime()) {
                 throw new InvalidValueException('Cannot schedule maintenance in past.', 1008);
             }
 
-            if ($this->getBackfilled() && !is_null($this->getBackfillDate()) && $this->getBackfillDate() > new DateTime()) {
+            if (!$this->filled && $this->getBackfilled() && !is_null($this->getBackfillDate()) && $this->getBackfillDate() > new DateTime()) {
                 throw new InvalidValueException('Backfill date must not lay in future', 1009);
             }
         }
@@ -276,6 +278,8 @@
 
         private function hydrateFromResponse(array $response)
         {
+            $this->filled = true;
+
             $this->setId($response['id'] ?? null);
             $this->setComponents($response['components'] ?? []);
             $this->setCreatedAt(isset($response['created_at']) ? new DateTime($response['created_at']) : null);
